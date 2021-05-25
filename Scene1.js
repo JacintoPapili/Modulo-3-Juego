@@ -1,0 +1,48 @@
+class Scene1 extends Phaser.Scene {
+    constructor() {
+      super('inicio');
+    }
+
+    preload ()
+    {
+      this.load.image('logo', 'assets/logo.png');
+      this.load.image('sky', 'assets/sky.png');
+      this.load.image('ground', 'assets/platform.png');
+      this.load.image("ground1","assets/platform1.png");
+      this.load.image('star', 'assets/star.png');
+      this.load.image('star1', 'assets/star1.png');
+      this.load.image('bomb', 'assets/bomb.png');
+      this.load.image("c4","assets/bomb2.png")
+      this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });  
+    }
+
+    create() {
+
+      //  Our player animations, turning, walking left and walking right.
+      this.anims.create({
+        key: 'left',
+        frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
+        frameRate: 10,
+        repeat: -1
+      });
+
+      this.anims.create({
+        key: 'turn',
+        frames: [ { key: 'dude', frame: 4 } ],
+        frameRate: 20
+      });
+
+      this.anims.create({
+        key: 'right',
+        frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
+        frameRate: 10,
+        repeat: -1
+      });
+
+      var logo = this.add.image(400, 300, 'logo').setScale(0.26)
+      logo.setInteractive()
+      logo.on('pointerdown', () => this.scene.start('juego') );
+
+      
+    }
+}
